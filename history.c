@@ -30,24 +30,24 @@ char *get_history_file(info_t *info)
 */
 int write_history(info_t *info)
 {
-	ssize_t ffd;
+	ssize_t fd;
 	char *filename = get_history_file(info);
 	list_t *node = NULL;
 
 	if (!filename)
 		return (-1);
 
-	ffd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
+	fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	free(filename);
-	if (ffd == -1)
+	if (fd == -1)
 		return (-1);
 	for (node = info->history; node; node = node->next)
 	{
-		_putsfd(node->str, ffd);
-		_putfd('\n', ffd);
+		_putsfd(node->str, fd);
+		_putfd('\n', fd);
 	}
-	_putfd(BUF_FLUSH, ffd);
-	close(ffd);
+	_putfd(BUF_FLUSH, fd);
+	close(fd);
 	return (1);
 }
 
@@ -58,38 +58,38 @@ int write_history(info_t *info)
  */
 int read_history(info_t *info)
 {
-	int ii, last = 0, linecount = 0;
-	ssize_t ffd, rrdlen, ffsize = 0;
+	int i, last = 0, linecount = 0;
+	ssize_t fd, rdlen, fsize = 0;
 	struct stat st;
 	char *buf = NULL, *filename = get_history_file(info);
 
 	if (!filename)
 		return (0);
 
-	ffd = open(filename, O_RDONLY);
+	fd = open(filename, O_RDONLY);
 	free(filename);
-	if (ffd == -1)
+	if (fd == -1)
 		return (0);
-	if (!fstat(ffd, &st))
-		ffsize = st.st_size;
-	if (ffsize < 2)
+	if (!fstat(fd, &st))
+		fsize = st.st_size;
+	if (fsize < 2)
 		return (0);
-	buf = malloc(sizeof(char) * (ffsize + 1));
+	buf = malloc(sizeof(char) * (fsize + 1));
 	if (!buf)
 		return (0);
-	rrdlen = read(ffd, buf, ffsize);
-	buf[ffsize] = 0;
-	if (rrdlen <= 0)
+	rdlen = read(fd, buf, fsize);
+	buf[fsize] = 0;
+	if (rdlen <= 0)
 		return (free(buf), 0);
-	close(ffd);
-	for (ii = 0; ii < ffsize; ii++)
-		if (buf[ii] == '\n')
+	close(fd);
+	for (i = 0; i < fsize; i++)
+		if (buf[i] == '\n')
 		{
-			buf[ii] = 0;
+			buf[i] = 0;
 			build_history_list(info, buf + last, linecount++);
-			last = ii + 1;
+			last = i + 1;
 		}
-	if (last != ii)
+	if (last != i)
 		build_history_list(info, buf + last, linecount++);
 	free(buf);
 	info->histcount = linecount;
@@ -127,12 +127,12 @@ int build_history_list(info_t *info, char *buf, int linecount)
 int renumber_history(info_t *info)
 {
 	list_t *node = info->history;
-	int ii = 0;
+	int i = 0;
 
 	while (node)
 	{
-		node->num = ii++;
+		node->num = i++;
 		node = node->next;
 	}
-	return (info->histcount = ii);
+	return (info->histcount = i);
 }
