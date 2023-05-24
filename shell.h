@@ -35,7 +35,7 @@
 #define HIST_MAX        4096
 #define HIST_FILE	".simple_shell_history"
 
-extern char **environ;
+extern char **environ1;
 
 
 /**
@@ -79,7 +79,7 @@ typedef struct passinfo
 	list_t *env;
 	list_t *history;
 	list_t *alias;
-	char **environ;
+	char **environ1;
 	int err_num;
 	int linecount_flag;
 	int status;
@@ -180,7 +180,7 @@ int _myexit(info_t *);
 int _myhelp(info_t *);
 int _mycd(info_t *);
 
-/* toem_builtin1.c */
+/* toem_builtin11.c */
 int _myalias(info_t *);
 int _myhistory(info_t *);
 
@@ -194,7 +194,7 @@ void free_info(info_t *, int);
 void clear_info(info_t *);
 void set_info(info_t *, char **);
 
-/* toem_environ.c */
+/* toem_environ1.c */
 int _mysetenv(info_t *);
 int _myunsetenv(info_t *);
 int populate_env_list(info_t *);
