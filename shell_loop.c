@@ -1,4 +1,14 @@
 #include "shell.h"
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <errno.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <limits.h>
 
 /**
  * hsh - main loop of the shell program
