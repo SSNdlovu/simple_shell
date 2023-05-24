@@ -105,7 +105,7 @@ typedef struct passinfo
  * @type: da builtin com flg
  * @func: da func
  */
-typedef struct builtin
+typedef struct builtin1
 {
 	int (*func)(info_t *);
 	char *type;
