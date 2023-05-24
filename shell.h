@@ -96,13 +96,8 @@ typedef struct passinfo
 } info_t;
 
 #define INFO_INIT \
-<<<<<<< HEAD
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
 		0, 0, 0}
-=======
-{  NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL,\
-	NULL, 0, 0, NULL, 0, 0, 0}
->>>>>>> 77a16a42c295e595db5d3fd6cebe32d88874ba96
 
 /**
  * struct builtin - contains a builtin string and related function
@@ -238,5 +233,4 @@ int replace_vars(info_t *);
 int replace_string(char **, char *);
 
 #endif
-
 
