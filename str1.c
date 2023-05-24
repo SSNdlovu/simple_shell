@@ -1,4 +1,8 @@
 #include "shell.h"
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
 
 /**
  * _strcpy - a string will be copied
@@ -8,16 +12,16 @@
  */
 char *_strcpy(char *dest, char *src)
 {
-	int i = 0;
+	int ii = 0;
 
 	if (dest == src || src == 0)
 		return (dest);
-	while (src[i])
+	while (src[ii])
 	{
-		dest[i] = src[i];
-		i++;
+		dest[ii] = src[ii];
+		ii++;
 	}
-	dest[i] = 0;
+	dest[ii] = 0;
 	return (dest);
 }
 
@@ -50,14 +54,14 @@ char *_strdup(const char *str)
  */
 void _puts(char *str)
 {
-	int i = 0;
+	int ii = 0;
 
 	if (!str)
 		return;
-	while (str[i] != '\0')
+	while (str[ii] != '\0')
 	{
-		_putchar(str[i]);
-		i++;
+		_putchar(str[ii]);
+		ii++;
 	}
 }
 
@@ -69,15 +73,15 @@ void _puts(char *str)
  */
 int _putchar(char c)
 {
-	static int i;
+	static int ii;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || ii >= WRITE_BUF_SIZE)
 	{
-		write(1, buf, i);
-		i = 0;
+		write(1, buf, ii);
+		ii = 0;
 	}
 	if (c != BUF_FLUSH)
-		buf[i++] = c;
+		buf[ii++] = c;
 	return (1);
 }

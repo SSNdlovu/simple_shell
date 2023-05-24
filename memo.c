@@ -1,4 +1,8 @@
 #include "shell.h"
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
 
 /**
  * bfree - deallocates a pointer and sets the address to NULL.

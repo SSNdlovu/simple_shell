@@ -1,4 +1,8 @@
 #include "shell.h"
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
 
 /**
  * list_len - computes the size of a linked list
@@ -7,14 +11,14 @@
  */
 size_t list_len(const list_t *h)
 {
-	size_t i = 0;
+	size_t ii = 0;
 
 	while (h)
 	{
 		h = h->next;
-		i++;
+		ii++;
 	}
-	return (i);
+	return (ii);
 }
 
 /**
@@ -25,30 +29,30 @@ size_t list_len(const list_t *h)
 char **list_to_strings(list_t *head)
 {
 	list_t *node = head;
-	size_t i = list_len(head), j;
+	size_t ii = list_len(head), jj;
 	char **strs;
 	char *str;
 
-	if (!head || !i)
+	if (!head || !ii)
 		return (NULL);
-	strs = malloc(sizeof(char *) * (i + 1));
+	strs = malloc(sizeof(char *) * (ii + 1));
 	if (!strs)
 		return (NULL);
-	for (i = 0; node; node = node->next, i++)
+	for (ii = 0; node; node = node->next, ii++)
 	{
 		str = malloc(_strlen(node->str) + 1);
 		if (!str)
 		{
-			for (j = 0; j < i; j++)
-				free(strs[j]);
+			for (jj = 0; jj < ii; jj++)
+				free(strs[jj]);
 			free(strs);
 			return (NULL);
 		}
 
 		str = _strcpy(str, node->str);
-		strs[i] = str;
+		strs[ii] = str;
 	}
-	strs[i] = NULL;
+	strs[ii] = NULL;
 	return (strs);
 }
 
@@ -60,7 +64,7 @@ char **list_to_strings(list_t *head)
  */
 size_t print_list(const list_t *h)
 {
-	size_t i = 0;
+	size_t ii = 0;
 
 	while (h)
 	{
@@ -70,9 +74,9 @@ size_t print_list(const list_t *h)
 		_puts(h->str ? h->str : "(nil)");
 		_puts("\n");
 		h = h->next;
-		i++;
+		ii++;
 	}
-	return (i);
+	return (ii);
 }
 
 /**
@@ -104,14 +108,14 @@ list_t *node_starts_with(list_t *node, char *prefix, char c)
  */
 ssize_t get_node_index(list_t *head, list_t *node)
 {
-	size_t i = 0;
+	size_t ii = 0;
 
 	while (head)
 	{
 		if (head == node)
-			return (i);
+			return (ii);
 		head = head->next;
-		i++;
+		ii++;
 	}
 	return (-1);
 }

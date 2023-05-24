@@ -1,4 +1,8 @@
 #include "shell.h"
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
 
 /**
  * _memset - populates memory with a specific byte value
@@ -9,10 +13,10 @@
  */
 char *_memset(char *s, char b, unsigned int n)
 {
-	unsigned int i;
+	unsigned int ii;
 
-	for (i = 0; i < n; i++)
-		s[i] = b;
+	for (ii = 0; ii < n; ii++)
+		s[ii] = b;
 	return (s);
 }
 

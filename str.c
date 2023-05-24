@@ -1,4 +1,8 @@
 #include "shell.h"
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
 
 /**
  * _strlen - the length of a string
@@ -7,14 +11,14 @@
  */
 int _strlen(char *s)
 {
-	int i = 0;
+	int ii = 0;
 
 	if (!s)
 		return (0);
 
 	while (*s++)
-		i++;
-	return (i);
+		ii++;
+	return (ii);
 }
 
 /**

@@ -1,4 +1,8 @@
 #include "shell.h"
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
 
 /**
  * is_cmd - the file will be checked if its an executable command
@@ -31,12 +35,12 @@ int is_cmd(info_t *info, char *path)
 char *dup_chars(char *pathstr, int start, int stop)
 {
 	static char buf[1024];
-	int i = 0, k = 0;
+	int ii = 0, kk = 0;
 
-	for (k = 0, i = start; i < stop; i++)
-		if (pathstr[i] != ':')
-			buf[k++] = pathstr[i];
-	buf[k] = 0;
+	for (kk = 0, ii = start; ii < stop; ii++)
+		if (pathstr[ii] != ':')
+			buf[kk++] = pathstr[ii];
+	buf[kk] = 0;
 	return (buf);
 }
 
@@ -49,7 +53,7 @@ char *dup_chars(char *pathstr, int start, int stop)
  */
 char *find_path(info_t *info, char *pathstr, char *cmd)
 {
-	int i = 0, curr_pos = 0;
+	int ii = 0, curr_pos = 0;
 	char *path;
 
 	if (!pathstr)
@@ -61,9 +65,9 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 	}
 	while (1)
 	{
-		if (!pathstr[i] || pathstr[i] == ':')
+		if (!pathstr[ii] || pathstr[ii] == ':')
 		{
-			path = dup_chars(pathstr, curr_pos, i);
+			path = dup_chars(pathstr, curr_pos, ii);
 			if (!*path)
 				_strcat(path, cmd);
 			else
@@ -73,11 +77,11 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 			}
 			if (is_cmd(info, path))
 				return (path);
-			if (!pathstr[i])
+			if (!pathstr[ii])
 				break;
-			curr_pos = i;
+			curr_pos = ii;
 		}
-		i++;
+		ii++;
 	}
 	return (NULL);
 }
