@@ -79,7 +79,7 @@ typedef struct passinfo
 	list_t *env;
 	list_t *history;
 	list_t *alias;
-	char **environ1;
+	char **environ;
 	int err_num;
 	int linecount_flag;
 	int status;
@@ -105,7 +105,7 @@ typedef struct passinfo
  * @type: da builtin com flg
  * @func: da func
  */
-typedef struct builtin
+typedef struct builtin1
 {
 	int (*func)(info_t *);
 	char *type;
