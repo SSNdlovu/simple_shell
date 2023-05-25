@@ -1,4 +1,8 @@
 #include "shell.h"
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
 
 /**
  * clear_info - initil info_t struct

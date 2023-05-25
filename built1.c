@@ -1,4 +1,8 @@
 #include "shell.h"
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
 
 /**
  * _myhistory - displays the history list, one command by line, preceded
